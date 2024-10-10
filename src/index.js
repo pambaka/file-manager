@@ -1,7 +1,7 @@
 import { COMMAND } from "./const.js";
 import exitFileManager from "./exit-file-manager.js";
 import getUserName from "./get-user-name.js";
-import { printCurrentDir } from "./current-dir.js";
+import { printCurrentDir, setCurrentDir } from "./current-dir.js";
 
 const userName = getUserName();
 console.log(`Welcome to the File Manager, ${userName}!`);
@@ -9,9 +9,11 @@ console.log(`Welcome to the File Manager, ${userName}!`);
 printCurrentDir();
 
 process.stdin.on("data", (data) => {
-  if (data.toString().trim() === COMMAND.exit) {
-    exitFileManager(userName);
-  }
+  const dataStr = data.toString().trim();
+
+  if (dataStr === COMMAND.exit) exitFileManager(userName);
+  if (dataStr.startsWith(COMMAND.cd))
+    setCurrentDir(dataStr.replace(`${COMMAND.cd} `, ""));
 
   printCurrentDir();
 });
