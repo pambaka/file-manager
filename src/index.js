@@ -11,9 +11,19 @@ printCurrentDir();
 process.stdin.on("data", (data) => {
   const dataStr = data.toString().trim();
 
-  if (dataStr === COMMAND.exit) exitFileManager(userName);
-  if (dataStr.startsWith(COMMAND.cd))
-    setCurrentDir(dataStr.replace(`${COMMAND.cd} `, ""));
+  switch (true) {
+    case dataStr === COMMAND.exit:
+      exitFileManager(userName);
+      break;
+    case dataStr.startsWith(COMMAND.cd):
+      setCurrentDir(dataStr.replace(`${COMMAND.cd} `, ""));
+      break;
+    case dataStr.startsWith(COMMAND.up):
+      setCurrentDir("..");
+      break;
+    default:
+      break;
+  }
 
   printCurrentDir();
 });
