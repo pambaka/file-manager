@@ -4,6 +4,7 @@ import getUserName from "./get-user-name.js";
 import { printCurrentDir, setCurrentDir } from "./current-dir.js";
 import listDirContent from "./list-dir-content.js";
 import printOsInfo from "./print-os-info.js";
+import calculateHash from "./calculate-hash.js";
 
 const userName = getUserName();
 console.log(`Welcome to the File Manager, ${userName}!`);
@@ -19,6 +20,9 @@ process.stdin.on("data", async (data) => {
       break;
     case dataStr.startsWith(COMMAND.cd):
       setCurrentDir(dataStr.replace(`${COMMAND.cd} `, ""));
+      break;
+    case dataStr.startsWith(COMMAND.hash):
+      await calculateHash(dataStr.replace(`${COMMAND.hash}`, "").trim());
       break;
     case dataStr === COMMAND.ls:
       await listDirContent();

@@ -1,6 +1,7 @@
 export const COMMAND = {
   exit: ".exit",
   cd: "cd",
+  hash: "hash",
   ls: "ls",
   os: "os",
   up: "up",
@@ -16,4 +17,5 @@ export const OS_ARG = {
 
 export const ERROR_MESSAGE = {
   invalidInput: "Invalid input",
+  operationFailed: "Operation failed",
 };
