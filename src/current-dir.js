@@ -17,3 +17,5 @@ export const setCurrentDir = (inputDir) => {
 
   if (fs.existsSync(newDir)) currentDir = newDir;
 };
+
+export const getCurrentDir = () => currentDir;

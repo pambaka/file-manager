@@ -2,13 +2,14 @@ import { COMMAND } from "./const.js";
 import exitFileManager from "./exit-file-manager.js";
 import getUserName from "./get-user-name.js";
 import { printCurrentDir, setCurrentDir } from "./current-dir.js";
+import listDirContent from "./list-dir-content.js";
 
 const userName = getUserName();
 console.log(`Welcome to the File Manager, ${userName}!`);
 
 printCurrentDir();
 
-process.stdin.on("data", (data) => {
+process.stdin.on("data", async (data) => {
   const dataStr = data.toString().trim();
 
   switch (true) {
@@ -18,7 +19,10 @@ process.stdin.on("data", (data) => {
     case dataStr.startsWith(COMMAND.cd):
       setCurrentDir(dataStr.replace(`${COMMAND.cd} `, ""));
       break;
-    case dataStr.startsWith(COMMAND.up):
+    case dataStr === COMMAND.ls:
+      await listDirContent();
+      break;
+    case dataStr === COMMAND.up:
       setCurrentDir("..");
       break;
     default:
