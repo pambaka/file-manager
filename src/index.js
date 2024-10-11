@@ -3,6 +3,7 @@ import exitFileManager from "./exit-file-manager.js";
 import getUserName from "./get-user-name.js";
 import { printCurrentDir, setCurrentDir } from "./current-dir.js";
 import listDirContent from "./list-dir-content.js";
+import printOsInfo from "./print-os-info.js";
 
 const userName = getUserName();
 console.log(`Welcome to the File Manager, ${userName}!`);
@@ -21,6 +22,9 @@ process.stdin.on("data", async (data) => {
       break;
     case dataStr === COMMAND.ls:
       await listDirContent();
+      break;
+    case dataStr.startsWith(COMMAND.os):
+      printOsInfo(dataStr.replace(`${COMMAND.os}`, "").trim());
       break;
     case dataStr === COMMAND.up:
       setCurrentDir("..");
