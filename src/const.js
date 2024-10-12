@@ -1,5 +1,6 @@
 export const COMMAND = {
   exit: ".exit",
+  add: "add",
   cat: "cat",
   cd: "cd",
   hash: "hash",
@@ -17,6 +18,11 @@ export const OS_ARG = {
 };
 
 export const ERROR_MESSAGE = {
+  fileExists: "File already exists",
   invalidInput: "Invalid input",
   operationFailed: "Operation failed",
+};
+
+export const ERROR_CODE = {
+  exist: "EEXIST",
 };
