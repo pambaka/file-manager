@@ -6,6 +6,7 @@ export const COMMAND = {
   hash: "hash",
   ls: "ls",
   os: "os",
+  rename: "rn",
   up: "up",
 };
 
