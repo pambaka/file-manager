@@ -5,6 +5,7 @@ import { printCurrentDir, setCurrentDir } from "./current-dir.js";
 import listDirContent from "./list-dir-content.js";
 import printOsInfo from "./print-os-info.js";
 import calculateHash from "./calculate-hash.js";
+import printFileContent from "./print-file-content.js";
 
 const userName = getUserName();
 console.log(`Welcome to the File Manager, ${userName}!`);
@@ -17,6 +18,9 @@ process.stdin.on("data", async (data) => {
   switch (true) {
     case dataStr === COMMAND.exit:
       exitFileManager(userName);
+      break;
+    case dataStr.startsWith(COMMAND.cat):
+      await printFileContent(dataStr.replace(`${COMMAND.cat}`, "").trim());
       break;
     case dataStr.startsWith(COMMAND.cd):
       setCurrentDir(dataStr.replace(`${COMMAND.cd} `, ""));

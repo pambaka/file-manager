@@ -1,5 +1,6 @@
 export const COMMAND = {
   exit: ".exit",
+  cat: "cat",
   cd: "cd",
   hash: "hash",
   ls: "ls",
