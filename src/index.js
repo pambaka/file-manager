@@ -9,6 +9,8 @@ import printFileContent from "./print-file-content.js";
 import createFile from "./create-file.js";
 import renameFile from "./rename-file.js";
 import copyFile from "./copy-file.js";
+import moveFile from "./move-file.js";
+import removeFile from "./remove-file.js";
 
 const userName = getUserName();
 console.log(`Welcome to the File Manager, ${userName}!`);
@@ -42,11 +44,17 @@ process.stdin.on("data", async (data) => {
     case dataStr === COMMAND.ls:
       await listDirContent();
       break;
+    case dataStr.startsWith(COMMAND.mv):
+      await moveFile(getArgs(COMMAND.mv));
+      break;
     case dataStr.startsWith(COMMAND.os):
       printOsInfo(getArgs(COMMAND.os));
       break;
     case dataStr.startsWith(COMMAND.rename):
       await renameFile(getArgs(COMMAND.rename));
+      break;
+    case dataStr.startsWith(COMMAND.rm):
+      await removeFile(getArgs(COMMAND.rm));
       break;
     case dataStr === COMMAND.up:
       setCurrentDir("..");

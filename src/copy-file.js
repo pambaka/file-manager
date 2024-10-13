@@ -7,7 +7,7 @@ import { pipeline } from "node:stream/promises";
 
 const customError = "custom Error";
 
-const copyFile = async (str) => {
+const copyFile = async (str, shouldThrowError = false) => {
   try {
     const files = str.split(" ");
     if (files.length !== 2)
@@ -38,6 +38,7 @@ const copyFile = async (str) => {
       if (error.code === ERROR_CODE.noEntry)
         message += ` (${ERROR_MESSAGE.noEntry})`;
 
+      if (shouldThrowError) throw new Error(message);
       console.error(message);
     }
   }

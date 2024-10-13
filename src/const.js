@@ -6,8 +6,10 @@ export const COMMAND = {
   cp: "cp",
   hash: "hash",
   ls: "ls",
+  mv: "mv",
   os: "os",
   rename: "rn",
+  rm: "rm",
   up: "up",
 };
 
@@ -31,3 +33,5 @@ export const ERROR_CODE = {
   isDirectory: "EISDIR",
   noEntry: "ENOENT",
 };
+
+export const customError = "custom Error";
