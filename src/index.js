@@ -1,4 +1,4 @@
-import { COMMAND } from "./const.js";
+import { COMMAND, ERROR_MESSAGE } from "./const.js";
 import exitFileManager from "./exit-file-manager.js";
 import getUserName from "./get-user-name.js";
 import { printCurrentDir, setCurrentDir } from "./current-dir.js";
@@ -60,6 +60,7 @@ process.stdin.on("data", async (data) => {
       setCurrentDir("..");
       break;
     default:
+      console.error(ERROR_MESSAGE.invalidInput);
       break;
   }
 
