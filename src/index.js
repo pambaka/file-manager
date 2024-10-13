@@ -8,6 +8,7 @@ import calculateHash from "./calculate-hash.js";
 import printFileContent from "./print-file-content.js";
 import createFile from "./create-file.js";
 import renameFile from "./rename-file.js";
+import copyFile from "./copy-file.js";
 
 const userName = getUserName();
 console.log(`Welcome to the File Manager, ${userName}!`);
@@ -31,6 +32,9 @@ process.stdin.on("data", async (data) => {
       break;
     case dataStr.startsWith(COMMAND.cd):
       setCurrentDir(getArgs(COMMAND.cd));
+      break;
+    case dataStr.startsWith(COMMAND.cp):
+      await copyFile(getArgs(COMMAND.cp));
       break;
     case dataStr.startsWith(COMMAND.hash):
       await calculateHash(getArgs(COMMAND.hash));

@@ -3,6 +3,7 @@ export const COMMAND = {
   add: "add",
   cat: "cat",
   cd: "cd",
+  cp: "cp",
   hash: "hash",
   ls: "ls",
   os: "os",
@@ -21,9 +22,12 @@ export const OS_ARG = {
 export const ERROR_MESSAGE = {
   fileExists: "File already exists",
   invalidInput: "Invalid input",
+  noEntry: "No such file or directory",
   operationFailed: "Operation failed",
 };
 
 export const ERROR_CODE = {
   exist: "EEXIST",
+  isDirectory: "EISDIR",
+  noEntry: "ENOENT",
 };
