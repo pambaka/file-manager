@@ -1,9 +1,9 @@
 import path from "node:path";
-import fs from "node:fs";
 import { ERROR_MESSAGE } from "./const.js";
 import { getCurrentDir } from "./current-dir.js";
 import copyFile from "./copy-file.js";
 import removeFile from "./remove-file.js";
+import printSuccessMessage from "./utils/print-success-message.js";
 
 const moveFile = async (str) => {
   try {
@@ -14,7 +14,8 @@ const moveFile = async (str) => {
 
     await copyFile(str, true).then(
       async () => {
-        await removeFile(oldFilePath);
+        await removeFile(oldFilePath, true);
+        printSuccessMessage("moved");
       },
       (error) => {
         throw error;

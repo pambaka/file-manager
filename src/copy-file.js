@@ -4,6 +4,7 @@ import * as fsPromises from "node:fs/promises";
 import { getCurrentDir } from "./current-dir.js";
 import { ERROR_CODE, ERROR_MESSAGE } from "./const.js";
 import { pipeline } from "node:stream/promises";
+import printSuccessMessage from "./utils/print-success-message.js";
 
 const customError = "custom Error";
 
@@ -22,6 +23,7 @@ const copyFile = async (str, shouldThrowError = false) => {
         const writeStream = fs.createWriteStream(newFilePath, { flags: "wx" });
 
         await pipeline(readStream, writeStream);
+        if (!shouldThrowError) printSuccessMessage("copied");
       },
       (error) => {
         throw error;
