@@ -5,6 +5,7 @@ export const COMMAND = {
   cd: "cd",
   cp: "cp",
   compress: "compress",
+  decompress: "decompress",
   hash: "hash",
   ls: "ls",
   mv: "mv",

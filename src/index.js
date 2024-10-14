@@ -13,6 +13,7 @@ import moveFile from "./move-file.js";
 import removeFile from "./remove-file.js";
 import readLine from "readline/promises";
 import compressFile from "./compress-file.js";
+import decompressFile from "./decompress-file.js";
 
 const userName = getUserName();
 console.log(`Welcome to the File Manager, ${userName}!`);
@@ -50,6 +51,9 @@ rl.on("line", async (data) => {
       break;
     case dataStr.startsWith(COMMAND.compress):
       await compressFile(getArgs(COMMAND.compress));
+      break;
+    case dataStr.startsWith(COMMAND.decompress):
+      await decompressFile(getArgs(COMMAND.decompress));
       break;
     case dataStr.startsWith(COMMAND.hash):
       await calculateHash(getArgs(COMMAND.hash));

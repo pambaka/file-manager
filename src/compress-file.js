@@ -18,7 +18,7 @@ const compressFile = async (str) => {
     const archivePath = path.resolve(getCurrentDir(), files[1]);
 
     const readStream = fs.createReadStream(filePath);
-    const compress = zlib.createGzip();
+    const compress = zlib.createBrotliCompress();
     const writeStream = fs.createWriteStream(archivePath, { flags: "wx" });
 
     await pipeline(readStream, compress, writeStream);
