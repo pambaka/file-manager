@@ -12,6 +12,7 @@ import copyFile from "./copy-file.js";
 import moveFile from "./move-file.js";
 import removeFile from "./remove-file.js";
 import readLine from "readline/promises";
+import compressFile from "./compress-file.js";
 
 const userName = getUserName();
 console.log(`Welcome to the File Manager, ${userName}!`);
@@ -46,6 +47,9 @@ rl.on("line", async (data) => {
       break;
     case dataStr.startsWith(COMMAND.cp):
       await copyFile(getArgs(COMMAND.cp));
+      break;
+    case dataStr.startsWith(COMMAND.compress):
+      await compressFile(getArgs(COMMAND.compress));
       break;
     case dataStr.startsWith(COMMAND.hash):
       await calculateHash(getArgs(COMMAND.hash));

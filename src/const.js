@@ -4,6 +4,7 @@ export const COMMAND = {
   cat: "cat",
   cd: "cd",
   cp: "cp",
+  compress: "compress",
   hash: "hash",
   ls: "ls",
   mv: "mv",
