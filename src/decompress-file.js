@@ -3,16 +3,14 @@ import { pipeline } from "node:stream/promises";
 import fs from "node:fs";
 import path from "node:path";
 import { getCurrentDir } from "./current-dir.js";
-import { customError, ERROR_MESSAGE } from "./const.js";
+import { ERROR_MESSAGE } from "./const.js";
 import handleError from "./utils/handle-error.js";
 import printSuccessMessage from "./utils/print-success-message.js";
+import getValidArgs from "./utils/get-valid-args.js";
 
 const decompressFile = async (str) => {
   try {
-    const files = str.split(" ");
-
-    if (files.length !== 2)
-      throw new Error(ERROR_MESSAGE.invalidInput, { cause: customError });
+    const files = getValidArgs(str);
 
     const archivePath = path.resolve(getCurrentDir(), files[0]);
     const filePath = path.resolve(getCurrentDir(), files[1]);

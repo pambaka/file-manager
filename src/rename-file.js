@@ -3,11 +3,11 @@ import { ERROR_MESSAGE } from "./const.js";
 import path from "node:path";
 import { getCurrentDir } from "./current-dir.js";
 import printSuccessMessage from "./utils/print-success-message.js";
+import getValidArgs from "./utils/get-valid-args.js";
 
 const renameFile = async (str) => {
   try {
-    const files = str.split(" ");
-    if (files.length !== 2) throw new Error(ERROR_MESSAGE.invalidInput);
+    const files = getValidArgs(str);
 
     if (files[1] !== path.parse(files[1]).base)
       throw new Error(

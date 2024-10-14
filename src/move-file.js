@@ -1,14 +1,13 @@
 import path from "node:path";
-import { ERROR_MESSAGE } from "./const.js";
 import { getCurrentDir } from "./current-dir.js";
 import copyFile from "./copy-file.js";
 import removeFile from "./remove-file.js";
 import printSuccessMessage from "./utils/print-success-message.js";
+import getValidArgs from "./utils/get-valid-args.js";
 
 const moveFile = async (str) => {
   try {
-    const files = str.split(" ");
-    if (files.length !== 2) throw new Error(ERROR_MESSAGE.invalidInput);
+    const files = getValidArgs(str);
 
     const oldFilePath = path.resolve(getCurrentDir(), files[0]);
 

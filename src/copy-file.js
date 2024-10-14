@@ -5,12 +5,11 @@ import { getCurrentDir } from "./current-dir.js";
 import { customError, ERROR_CODE, ERROR_MESSAGE } from "./const.js";
 import { pipeline } from "node:stream/promises";
 import printSuccessMessage from "./utils/print-success-message.js";
+import getValidArgs from "./utils/get-valid-args.js";
 
 const copyFile = async (str, shouldThrowError = false) => {
   try {
-    const files = str.split(" ");
-    if (files.length !== 2)
-      throw new Error(ERROR_MESSAGE.invalidInput, { cause: customError });
+    const files = getValidArgs(str);
 
     const filePath = path.resolve(getCurrentDir(), files[0]);
     const fileName = path.parse(filePath).base;
