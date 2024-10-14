@@ -2,11 +2,9 @@ import path from "node:path";
 import fs from "node:fs";
 import * as fsPromises from "node:fs/promises";
 import { getCurrentDir } from "./current-dir.js";
-import { ERROR_CODE, ERROR_MESSAGE } from "./const.js";
+import { customError, ERROR_CODE, ERROR_MESSAGE } from "./const.js";
 import { pipeline } from "node:stream/promises";
 import printSuccessMessage from "./utils/print-success-message.js";
-
-const customError = "custom Error";
 
 const copyFile = async (str, shouldThrowError = false) => {
   try {
@@ -15,7 +13,8 @@ const copyFile = async (str, shouldThrowError = false) => {
       throw new Error(ERROR_MESSAGE.invalidInput, { cause: customError });
 
     const filePath = path.resolve(getCurrentDir(), files[0]);
-    const newFilePath = path.resolve(getCurrentDir(), files[1]);
+    const fileName = path.parse(filePath).base;
+    const newFilePath = path.resolve(getCurrentDir(), files[1], fileName);
 
     await fsPromises.access(filePath).then(
       async () => {
