@@ -11,19 +11,28 @@ import renameFile from "./rename-file.js";
 import copyFile from "./copy-file.js";
 import moveFile from "./move-file.js";
 import removeFile from "./remove-file.js";
+import readLine from "readline/promises";
 
 const userName = getUserName();
 console.log(`Welcome to the File Manager, ${userName}!`);
 
-printCurrentDir();
+const rl = readLine.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+  prompt: "\x1b[34m> \x1b[0m",
+});
 
-process.stdin.on("data", async (data) => {
+printCurrentDir();
+rl.prompt();
+
+rl.on("line", async (data) => {
   const dataStr = data.toString().trim();
 
   const getArgs = (command) => dataStr.replace(command, "").trim();
 
   switch (true) {
     case dataStr === COMMAND.exit:
+      rl.close();
       exitFileManager(userName);
       break;
     case dataStr.startsWith(COMMAND.add):
@@ -33,7 +42,7 @@ process.stdin.on("data", async (data) => {
       await printFileContent(getArgs(COMMAND.cat));
       break;
     case dataStr.startsWith(COMMAND.cd):
-      setCurrentDir(getArgs(COMMAND.cd));
+      await setCurrentDir(getArgs(COMMAND.cd));
       break;
     case dataStr.startsWith(COMMAND.cp):
       await copyFile(getArgs(COMMAND.cp));
@@ -57,7 +66,7 @@ process.stdin.on("data", async (data) => {
       await removeFile(getArgs(COMMAND.rm));
       break;
     case dataStr === COMMAND.up:
-      setCurrentDir("..");
+      await setCurrentDir("..");
       break;
     default:
       console.error(ERROR_MESSAGE.invalidInput);
@@ -65,8 +74,11 @@ process.stdin.on("data", async (data) => {
   }
 
   printCurrentDir();
+  rl.prompt();
 });
 
-process.on("SIGINT", () => {
+rl.on("SIGINT", () => {
+  rl.close();
+  console.log("");
   exitFileManager(userName);
 });
